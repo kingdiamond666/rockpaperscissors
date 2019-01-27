@@ -1,20 +1,15 @@
 import React from 'react';
+import shittalk from './Shittalk.module.css';
 
-const style = {
-    background: '#fff',
-    color: 'black',
-    borderRadius: '30%',
-    height: '300px',
-    width: '500px',
-    display: 'grid',
-    alignContent: 'center',
-    float: 'right',
-    marginRight: '40px'
-}
 
 const Shittalk = (props) => (
-    <div style={style}>
-        <p>{props.randomSaying}</p>
+    <div>
+        <blockquote className={shittalk.Bubble}>    
+            <div>
+                <p className={shittalk.Inner}>{props.randomSaying}</p>
+            </div>
+        </blockquote>
+        <p>Computer</p>
     </div>
 )
 export default Shittalk;

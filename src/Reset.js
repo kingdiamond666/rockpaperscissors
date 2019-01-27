@@ -1,19 +1,19 @@
 import React from 'react';
 
-
-const style = {  
-
-}
 const buttonstyle ={
-    backgroundColor: '#fff',
-    width: '20%',
-    height: '20px',
-    color: 'black',
-    border: '2px solid black',
-    borderRadius: '2%',
+    background: '#282c34',
+    fontFamily: 'Source Code Pro',
+    textTransform: 'uppercase',
+    color: '#fff',
+    borderRadius: '5px',
+    border: '2px solid #fff',
+    height: '50px',
+    width: '100px',
+    display: 'block',
+    margin: '0 auto 20px auto'
  }
 const reset = (props) => (
-    <form onSubmit={props.reset} style={style}>
+    <form onSubmit={props.reset}>
           <input type="submit" value="Reset"style={buttonstyle} />
     </form>
 )

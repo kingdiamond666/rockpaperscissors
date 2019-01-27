@@ -1,10 +1,11 @@
 import React, { Component } from 'react'; 
 import './App.css';
-import './Speech.module.css';
 import Speech from './Speech';
 import Form from './Form';
 import Reset from './Reset';
 import Shittalk from './Shittalk';
+
+
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class App extends Component {
   }
  autoWin( event ) {
    event.preventDefault();
-   this.setState({computer: true});
+   this.setState({submitted: true,computer: true});
  }
   handleSubmit(event) {
     event.preventDefault();
@@ -78,8 +79,8 @@ class App extends Component {
     })
     
   }
-  //TODO: make a random array of shit talking phrases the computer can taunt you with when it wins.
-  //TODO: style components.
+
+
   //TODO: figure out how to deploy react apps to github (do we need any git ignore files?)
   //TODO: render a robot and the <Speech /> component will be a text bubble.
   
@@ -89,40 +90,35 @@ class App extends Component {
       ["Bleep Blop Bloop...Fuck your mother"],
       ["Your reproductive organs are inadiquate bleep bloop"],
       ["Loser face!"],
-      ["Neo was a bitch in the Matrix"]
+      ["Neo was a bitch in the Matrix"],
+      ["Your sister downloaded my 3 inch floppy"]
   ]
-    const styleLose = {
-      border: '2px solid black',
-      borderRadius: '10px',
-      width: '33.33%',
-      marginLeft: '30px'
-    }
-    const styleWin = {
-        background: '#fff',
-        color: 'black',
-        border: '2px solid black',
-        borderRadius: '10px',
-        width: '33.33%',
-        marginLeft: '30px'
-    }
-    //I think it's running the submit logic first so adding a boolean once the outcome is determined in order to choose which style is kind of redundant because that shits not getting calculated til after the on submit.
-    console.log("1st " + this.state.computer);
+   
     const rando = Math.floor(Math.random() * sayings.length)
     const bubble = this.state.submitted ? 
     [
-      <Speech outcome={this.state.outcome} guesses={this.state.guesses} style={this.state.computer ? styleLose : styleWin}/>, 
+      <Speech 
+      outcome={this.state.outcome} 
+      guesses={this.state.guesses}
+      computer={this.state.computer}
+      />, 
       <Reset reset={this.handleReset} />
-    ]: 
-      <Form submitted={this.handleSubmit} value={this.state.value} changed={this.handleChange}/>;
-    const shitTalker = this.state.computer ? <Shittalk randomSaying={sayings[rando]} /> : null;
-    console.log("2nd " + this.state.computer);
-    return (
+    ]
+      : 
+      <Form 
+      submitted={this.handleSubmit} 
+      value={this.state.value} 
+      changed={this.handleChange}
+      />;
+    const shitTalker = this.state.computer ? 
+    <Shittalk randomSaying={sayings[rando]} /> : null;
 
+    return (
       <div className="App">
+        <button onClick={this.autoWin}>Auto Win</button>   
         <h1>Rock, Paper, Scissors</h1> 
         {bubble}
-        {shitTalker} 
-        <button onClick={this.autoWin}>Auto Win</button>       
+        {shitTalker}      
       </div>
     );
   }

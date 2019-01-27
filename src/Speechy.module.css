@@ -1,0 +1,33 @@
+.Speechy{
+    text-align: center;
+    display: grid;
+    justify-items: center;
+    color:black;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    width: 500px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+.Speechy  p {
+    color: #fff;
+    align-self: start;
+    padding: 20px;
+}
+.Speechy h1 {
+    margin: auto;
+    padding-top: 10px;
+}
+.SpeechWin{
+    background-color: #fff;
+    color: black;
+}
+.SpeechWin h1{
+    color: black;
+}
+.SpeechWin p{
+    color: black;
+}
+.SpeechLose{
+    color: red;
+}

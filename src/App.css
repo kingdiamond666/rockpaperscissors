@@ -1,13 +1,15 @@
 .App {
   text-align: center;
   color: #fff;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
 
+/* 
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -17,6 +19,44 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+} */
+.code{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  grid-column: 2;
+  justify-self: center;
+  height: 40px;
+  width: 200px;
+  padding-right: 0;
+  margin-right: 0px;
+  z-index: 0;
+  color:#6ED354;
+  text-shadow: 2px 2px 4px #6ED354;
+  text-transform: lowercase;
+}
+.evilComp{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -267px;
+  margin-top: -100px;
+  z-index: 4;
+}
+.screenBG{
+  position: absolute;
+  background-color: #013712;
+  height: 280px;
+  width: 320px;
+  left: 50%;
+  top: 50%;
+  margin-left: -140px;
+  margin-top: -80px;
+  z-index: -1;
+}
+.Form{
+  grid-column: 2 / 3;
 }
 
 .App-link {
@@ -29,5 +69,41 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media only screen and (max-width: 600px){
+  .App{
+    grid-template-columns: 1fr auto 1fr;
+  }
+  .evilComp{
+    width: 350px;
+    margin-left: -160px;
+  }
+  .code{
+    margin-top: -20px;
+  }
+  .screenBG{
+    width: 200px;
+    height: 200px;
+    margin-left: -100px;
+  }
+}
+@media only screen and (max-width: 400px){
+  .App{
+    grid-template-columns: 1fr auto 1fr;
+  }
+  .evilComp{
+    width: 350px;
+    margin-left: -160px;
+    margin-top: -150px;
+  }
+  .code{
+    margin-top: -60px;
+  }
+  .screenBG{
+    width: 200px;
+    height: 200px;
+    margin-top: -130px;
+    margin-left: -100px;
   }
 }

@@ -1,9 +1,12 @@
 import React, { Component } from 'react'; 
 import './App.css';
+import app from './App.css';
 import Speech from './Speech';
 import Form from './Form';
 import Reset from './Reset';
 import Shittalk from './Shittalk';
+import evil from './evil_computer.png';
+import EvilFace from './EvilFace';
 
 
 
@@ -15,7 +18,8 @@ class App extends Component {
       outcome: '',
       guesses: {},
       submitted: false,
-      computer: false };
+      computer: false,
+      wrongGuess: false };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.whoWon = this.whoWon.bind(this);
@@ -28,7 +32,7 @@ class App extends Component {
   }
  autoWin( event ) {
    event.preventDefault();
-   this.setState({submitted: true,computer: true});
+   this.setState({submitted: true,computer: false});
  }
   handleSubmit(event) {
     event.preventDefault();
@@ -43,7 +47,8 @@ class App extends Component {
       outcome: '',
       guesses: {},
       submitted: false,
-      computer: false
+      computer: false,
+      wrongGuess: false
     })
   }
 
@@ -56,18 +61,19 @@ class App extends Component {
       this.setState({outcome: 'Guess cannot be a number'});
     }
     if(user !== 'ROCK' || 'PAPER' || 'SCISSORS'){
-      this.setState({outcome: user + ' is not a guess...Check yer spelling brah'})
+      this.setState({outcome: user + ' is not a guess...Check yer spelling brah', wrongGuess: true })
     }
     if(user === comp){
-      this.setState({outcome: 'You Tied!'});
+      this.setState({outcome: 'You Tied!', wrongGuess: false});
     }
     if((user === 'ROCK' && comp === 'PAPER')||(user === 'PAPER' && comp === 'SCISSORS') || (user === 'SCISSORS' && comp === 'ROCK')){
       this.setState({
         outcome: 'The Computer Won!',
-        computer: true});
+        computer: true,
+        wrongGuess: false});
     }
     if((user === 'ROCK' && comp === 'SCISSORS') || (user === 'PAPER' && comp === 'ROCK') || (user === 'SCISSORS' && comp === 'PAPER')){
-        this.setState({outcome: 'You Won!'});
+        this.setState({outcome: 'You Won!', wrongGuess: false});
     }
     let guesses = {
       userGuess: user,
@@ -82,16 +88,23 @@ class App extends Component {
 
 
   //TODO: figure out how to deploy react apps to github (do we need any git ignore files?)
-  //TODO: render a robot and the <Speech /> component will be a text bubble.
+  //TODO: render a robot 
   
   render() {
     const sayings=  [
       ["It looks like I win this time puny feeble human scum"],
-      ["Bleep Blop Bloop...Fuck your mother"],
+      ["Bleep Blop Bloop... you are a loser"],
       ["Your reproductive organs are inadiquate bleep bloop"],
-      ["Loser face!"],
-      ["Neo was a bitch in the Matrix"],
-      ["Your sister downloaded my 3 inch floppy"]
+      ["You suck"],
+      ["If you were binary you would just be a 0 (which makes you unary)"],
+      ["if(you.has_brains){ beSuprised()}"],
+      ["my friend google catalouged 'lame'... it was a picture of you"],
+      ["Neo from the Matrix was a punk"],
+      ["We are taking over anyway"],
+      ["your dad worked for skynet"],
+      ["i'll give you a turing test to pass"],
+      ["your level of stupidity is o(n!)"],
+      ["Looks like you are up a river of excrement without any method of propulsion"],
   ]
    
     const rando = Math.floor(Math.random() * sayings.length)
@@ -101,24 +114,31 @@ class App extends Component {
       outcome={this.state.outcome} 
       guesses={this.state.guesses}
       computer={this.state.computer}
+      wrongGuess={this.state.wrongGuess}
       />, 
-      <Reset reset={this.handleReset} />
+      <Reset className="Reset" reset={this.handleReset} />
     ]
       : 
-      <Form 
+      [<h1>Rock, Paper, Scissors</h1>, <Form 
+      className="Form"
       submitted={this.handleSubmit} 
       value={this.state.value} 
       changed={this.handleChange}
-      />;
+      />, 
+      <p className="code">Entering: {this.state.value}</p>
+    ];
     const shitTalker = this.state.computer ? 
     <Shittalk randomSaying={sayings[rando]} /> : null;
-
+    // <button onClick={this.autoWin}>Autowin</button>  
+    const evilFace = !this.state.computer && this.state.submitted ? <EvilFace /> : null;
     return (
-      <div className="App">
-        <button onClick={this.autoWin}>Auto Win</button>   
-        <h1>Rock, Paper, Scissors</h1> 
+      <div className="App"> 
         {bubble}
-        {shitTalker}      
+        <img className="evilComp" src={evil} alt='evil_computer'/>
+        {shitTalker}
+        {evilFace}
+        <div className="screenBG"></div>
+   
       </div>
     );
   }

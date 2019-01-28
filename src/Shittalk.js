@@ -4,12 +4,11 @@ import shittalk from './Shittalk.module.css';
 
 const Shittalk = (props) => (
     <div>
-        <blockquote className={shittalk.Bubble}>    
-            <div>
-                <p className={shittalk.Inner}>{props.randomSaying}</p>
+        <blockquote className={shittalk.container}>    
+            <div className={shittalk.display}>
+                <p className={shittalk.code}>{props.randomSaying}... <br/><br/> Love,<br/> ~The Computer</p>
             </div>
         </blockquote>
-        <p>Computer</p>
     </div>
 )
 export default Shittalk;

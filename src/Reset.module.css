@@ -1,0 +1,40 @@
+.Reset {
+    background: #282c34;
+    height: 50px;
+    width: 100px;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+    margin: 0 auto 20px auto;
+ }
+
+ .Submit{
+    background: #282c34;
+    font-family: Source Code Pro;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    border: 2px solid #fff;
+    height: 50px;
+    width: 100px;
+    display: block;
+    margin: 0 auto 20px auto;
+ }
+ 
+ .Submit:hover{
+    border: 3px solid #fff;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: .3s;
+    font-size: 1.2rem;
+    color: black;
+ }
+
+ @media only screen and (max-width: 600px){
+     .Reset{
+         grid-row: 3;
+         grid-column: 2;
+         justify-self: center;
+         align-self: center;
+     }
+ }

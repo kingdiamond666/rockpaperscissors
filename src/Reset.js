@@ -1,20 +1,9 @@
 import React from 'react';
+import { Reset, Submit } from './Reset.module.css';
 
-const buttonstyle ={
-    background: '#282c34',
-    fontFamily: 'Source Code Pro',
-    textTransform: 'uppercase',
-    color: '#fff',
-    borderRadius: '5px',
-    border: '2px solid #fff',
-    height: '50px',
-    width: '100px',
-    display: 'block',
-    margin: '0 auto 20px auto'
- }
 const reset = (props) => (
-    <form onSubmit={props.reset}>
-          <input type="submit" value="Reset"style={buttonstyle} />
+    <form onSubmit={props.reset} className={ Reset }>
+          <input type="submit" value="Reset" className={ Submit } />
     </form>
 )
 

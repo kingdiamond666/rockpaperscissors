@@ -1,5 +1,9 @@
 .Form{
     display:block;
+    align-self: end;
+    z-index: 2;
+    grid-column: 2 / 3;
+    grid-row: 2;
     margin: 20px auto;
     background: none;
     border: 2px solid #fff;
@@ -7,6 +11,9 @@
     text-align: center;
     padding: 5px;
     color: #fff;
+}
+.Form label{
+    margin-top: 20px;
 }
 .Form:focus{
     outline: none;

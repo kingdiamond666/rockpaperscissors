@@ -1,12 +1,11 @@
 import React, { Component } from 'react'; 
 import './App.css';
-import app from './App.css';
-import Speech from './Speech';
-import Form from './Form';
-import Reset from './Reset';
-import Shittalk from './Shittalk';
-import evil from './evil_computer.png';
-import EvilFace from './EvilFace';
+import Speech   from './components/Speech/Speech';
+import Form     from './components/Form/Form';
+import Reset    from './components/Reset/Reset';
+import Shittalk from './components/Shittalk/Shittalk';
+import evil     from './evil_computer.png';
+import EvilFace from './components/EvilFace/EvilFace';
 
 
 
@@ -22,9 +21,9 @@ class App extends Component {
       wrongGuess: false };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.whoWon = this.whoWon.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-    this.autoWin = this.autoWin.bind(this);
+    this.whoWon       = this.whoWon.bind(this);
+    this.handleReset  = this.handleReset.bind(this);
+    this.autoWin      = this.autoWin.bind(this);
   }
 
   handleChange = (event) =>{
@@ -51,12 +50,15 @@ class App extends Component {
       wrongGuess: false
     })
   }
-
+ /*=======================
+      GAME LOGIC
+  ======================*/
   whoWon = (user) => {
-    const rpsArr = ['ROCK', 'PAPER', 'SCISSORS'];
-    const rando = (num) => ((Math.floor(Math.random() * num)));
-    const rand3 = rando(3);
-    const comp = rpsArr[rand3];
+    const rpsArr = ['ROCK', 'PAPER', 'SCISSORS'],
+          rando  = (num) => ((Math.floor(Math.random() * num))),
+          rand3  = rando(3),
+          comp   = rpsArr[rand3];
+
     if(user !== typeof(string)){
       this.setState({outcome: 'Guess cannot be a number'});
     }
@@ -66,11 +68,13 @@ class App extends Component {
     if(user === comp){
       this.setState({outcome: 'You Tied!', wrongGuess: false});
     }
-    if((user === 'ROCK' && comp === 'PAPER')||(user === 'PAPER' && comp === 'SCISSORS') || (user === 'SCISSORS' && comp === 'ROCK')){
-      this.setState({
-        outcome: 'The Computer Won!',
-        computer: true,
-        wrongGuess: false});
+    if((user === 'ROCK' && comp === 'PAPER')||
+        (user === 'PAPER' && comp === 'SCISSORS') || 
+        (user === 'SCISSORS' && comp === 'ROCK')){
+          this.setState({
+            outcome: 'The Computer Won!',
+            computer: true,
+            wrongGuess: false});
     }
     if((user === 'ROCK' && comp === 'SCISSORS') || (user === 'PAPER' && comp === 'ROCK') || (user === 'SCISSORS' && comp === 'PAPER')){
         this.setState({outcome: 'You Won!', wrongGuess: false});
@@ -82,13 +86,12 @@ class App extends Component {
     this.setState({ 
       value: '',
       guesses: guesses
-    })
-    
+    })  
   }
 
 
   //TODO: figure out how to deploy react apps to github (do we need any git ignore files?)
-  //TODO: render a robot 
+  //TODO: turn sayings into a higher order component or move to shittalk component
   
   render() {
     const sayings=  [
@@ -105,31 +108,34 @@ class App extends Component {
       ["i'll give you a turing test to pass"],
       ["your level of stupidity is o(n!)"],
       ["Looks like you are up a river of excrement without any method of propulsion"],
-  ]
-   
-    const rando = Math.floor(Math.random() * sayings.length)
-    const bubble = this.state.submitted ? 
-    [
-      <Speech 
-      outcome={this.state.outcome} 
-      guesses={this.state.guesses}
-      computer={this.state.computer}
-      wrongGuess={this.state.wrongGuess}
-      />, 
-      <Reset className="Reset" reset={this.handleReset} />
     ]
-      : 
-      [<h1>Rock, Paper, Scissors</h1>, <Form 
-      className="Form"
-      submitted={this.handleSubmit} 
-      value={this.state.value} 
-      changed={this.handleChange}
-      />, 
-      <p className="code">Entering: {this.state.value}</p>
-    ];
+   
+    const rando  = Math.floor(Math.random() * sayings.length),
+          bubble = this.state.submitted ? 
+          [
+            <Speech 
+              outcome={this.state.outcome} 
+              guesses={this.state.guesses}
+              computer={this.state.computer}
+              wrongGuess={this.state.wrongGuess}/>,
+
+            <Reset className="Reset" reset={this.handleReset} />
+          ]
+            : 
+          [
+            <h1>Rock, Paper, Scissors</h1>, 
+            <Form 
+              className="Form"
+              submitted={this.handleSubmit} 
+              value={this.state.value} 
+              changed={this.handleChange}/>,
+
+            <p className="code">Entering: {this.state.value}</p>
+          ];
     const shitTalker = this.state.computer ? 
-    <Shittalk randomSaying={sayings[rando]} /> : null;
-    // <button onClick={this.autoWin}>Autowin</button>  
+      <Shittalk randomSaying={sayings[rando]} /> : null;
+
+    // For testing put this in the return statement: <button onClick={this.autoWin}>Autowin</button>  
     const evilFace = !this.state.computer && this.state.submitted ? <EvilFace /> : null;
     return (
       <div className="App"> 
@@ -138,7 +144,6 @@ class App extends Component {
         {shitTalker}
         {evilFace}
         <div className="screenBG"></div>
-   
       </div>
     );
   }

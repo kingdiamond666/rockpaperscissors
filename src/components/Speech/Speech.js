@@ -1,6 +1,5 @@
 import React from 'react';
 import speechy from './Speechy.module.css';
-import Reset from './Reset';
 
 const Speech = (props) => {  
     let speechClass = [speechy.Speechy];
